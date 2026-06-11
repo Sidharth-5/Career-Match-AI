@@ -1,112 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CareerMatch AI</title>
 
-<link rel="stylesheet" href="style.css">
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerMatch AI</title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Custom CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 <body>
 
-<div class="container">
+    <!-- HERO -->
 
-    <div class="hero">
+    <section class="hero-section">
 
-        <h1>CareerMatch AI</h1>
+        <div class="container">
 
-        <p>
-            Upload your resume and discover the
-            best career opportunities using AI.
-        </p>
+            <div class="hero-content">
 
-    </div>
+                <h1>
+                    CareerMatch AI
+                </h1>
 
-    <div class="card">
-
-        <form id="resumeForm">
-
-            <div class="upload-box">
-
-                <input
-                    type="file"
-                    id="resumeFile"
-                    accept=".pdf,.docx,.txt"
-                    required
-                >
+                <p>
+                    Upload your resume and let AI
+                    discover the most suitable
+                    opportunities for your skills.
+                </p>
 
             </div>
 
-            <input
-                type="text"
-                id="location"
-                placeholder="Location"
-                value="Mauritius"
+        </div>
+
+    </section>
+
+    <!-- UPLOAD SECTION -->
+
+    <section class="container mb-5">
+
+        <div class="glass-card">
+
+            <form id="resumeForm">
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Upload Resume
+                    </label>
+
+                    <input
+                        type="file"
+                        id="resumeFile"
+                        class="form-control"
+                        accept=".pdf,.docx,.txt"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        class="form-control"
+                        value="Mauritius"
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="analyze-btn"
+                >
+                    Analyze Resume
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- LOADING -->
+     
+        <section
+            id="loading"
+            class="container hidden"
+        >
+
+            <div class="glass-card text-center">
+
+                <div class="spinner"></div>
+
+                <h3 class="mt-4">
+                    Analyzing Your Resume
+                </h3>
+
+                <p class="mt-2">
+                    This may take up to a minute.
+                </p>
+
+                <p id="loadingText">
+                    Reading your resume...
+                </p>
+
+            </div>
+
+        </section>
+
+    <!-- RESULTS -->
+
+    <section
+        id="results"
+        class="container hidden"
+    >
+
+        <!-- Candidate Overview -->
+
+        <div class="glass-card mb-4">
+
+            <h2 class="section-title">
+                Candidate Profile
+            </h2>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <h5>Field</h5>
+
+                        <p id="field"></p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="info-box">
+
+                        <h5>Seniority</h5>
+
+                        <p id="seniority"></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Skills -->
+
+        <div class="glass-card mb-4">
+
+            <h2 class="section-title">
+                Skills
+            </h2>
+
+            <div
+                id="skills"
+                class="tag-container"
+            ></div>
+
+        </div>
+
+        <!-- Suitable Jobs -->
+
+        <div class="glass-card mb-4">
+
+            <h2 class="section-title">
+                Recommended Roles
+            </h2>
+
+            <select
+                id="jobs"
+                class="role-dropdown"
+                size="10"
             >
+            </select>
 
-            <button type="submit">
-                Analyze Resume
-            </button>
-
-        </form>
-
-    </div>
-
-    <div id="loading" class="loading hidden">
-
-        <div class="spinner"></div>
-
-        <h2>Analyzing Resume...</h2>
-
-        <p>
-            Extracting skills and generating
-            career recommendations.
-        </p>
-
-    </div>
-
-    <div id="results" class="results hidden">
-
-        <div class="result-card">
-            <h3>Candidate Field</h3>
-            <p id="field"></p>
         </div>
 
-        <div class="result-card">
-            <h3>Seniority Level</h3>
-            <p id="seniority"></p>
+
+    </section>
+
+    <!-- JOB MATCHES -->
+
+    <section
+        id="jobMatches"
+        class="container hidden"
+    >
+
+        <div class="job-header mb-4">
+
+            <h2 class="section-title mb-0">
+                Real Job Matches
+            </h2>
+
+            <span
+                id="jobCount"
+                class="job-count"
+            >
+                0 Jobs Found
+            </span>
+
         </div>
 
-        <div class="result-card">
-            <h3>Technical Skills</h3>
-            <div id="skills"></div>
+        <div
+            id="jobGrid"
+            class="row g-4"
+        ></div>
+
+    </section>
+
+    <!-- ERROR -->
+
+    <section
+        id="errorBox"
+        class="container hidden"
+    >
+
+        <div class="error-card">
+
+            <h3>Error</h3>
+
+            <p id="errorMessage"></p>
+
         </div>
 
-        <div class="result-card">
-            <h3>Soft Skills</h3>
-            <div id="softSkills"></div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container text-center">
+
+            <p>
+                CareerMatch AI<br> 
+                Powered by Google Gemini & JSearch
+            </p>
+
         </div>
 
-        <div class="result-card">
-            <h3>Certifications</h3>
-            <ul id="certifications"></ul>
-        </div>
+    </footer>
 
-        <div class="result-card">
-            <h3>Suitable Job Titles</h3>
-            <ul id="jobs"></ul>
-        </div>
-
-        <div class="result-card">
-            <h3>Job Search Queries</h3>
-            <ul id="queries"></ul>
-        </div>
-
-    </div>
-
-</div>
-
-<script type="module" src="script.js"></script>
+    <script
+        type="module"
+        src="script.js"
+    ></script>
 
 </body>
+
 </html>
