@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerMatch AI</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>CareerMatch AI</h1>
+
+        <p>
+            Upload your resume and discover the
+            best career opportunities using AI.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <form id="resumeForm">
+
+            <div class="upload-box">
+
+                <input
+                    type="file"
+                    id="resumeFile"
+                    accept=".pdf,.docx,.txt"
+                    required
+                >
+
+            </div>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Location"
+                value="Mauritius"
+            >
+
+            <button type="submit">
+                Analyze Resume
+            </button>
+
+        </form>
+
+    </div>
+
+    <div id="loading" class="loading hidden">
+
+        <div class="spinner"></div>
+
+        <h2>Analyzing Resume...</h2>
+
+        <p>
+            Extracting skills and generating
+            career recommendations.
+        </p>
+
+    </div>
+
+    <div id="results" class="results hidden">
+
+        <div class="result-card">
+            <h3>Candidate Field</h3>
+            <p id="field"></p>
+        </div>
+
+        <div class="result-card">
+            <h3>Seniority Level</h3>
+            <p id="seniority"></p>
+        </div>
+
+        <div class="result-card">
+            <h3>Technical Skills</h3>
+            <div id="skills"></div>
+        </div>
+
+        <div class="result-card">
+            <h3>Soft Skills</h3>
+            <div id="softSkills"></div>
+        </div>
+
+        <div class="result-card">
+            <h3>Certifications</h3>
+            <ul id="certifications"></ul>
+        </div>
+
+        <div class="result-card">
+            <h3>Suitable Job Titles</h3>
+            <ul id="jobs"></ul>
+        </div>
+
+        <div class="result-card">
+            <h3>Job Search Queries</h3>
+            <ul id="queries"></ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
